@@ -7,14 +7,14 @@ function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
   const categories = ["Computer Science", "Data Science", "Business"];
 
-  //function
+  //function handle
 
   const handleShowDropdown = () => {
     setShowDropdown(!showDropdown);
   };
   return (
     <nav className="bg-gray-300  border-b  shadow-sm  ">
-      {/* Logo and othr */}
+      {/* Logo and otherr */}
       <div className=" mx-auto px-4 py-6 flex justify-between items-center">
         <div className="flex items-center space-x-2 gap-4">
           <span className="text-xl font-bold text-gray-800">
@@ -54,7 +54,9 @@ function Navbar() {
             Log in
           </Button>
           <span className="text-gray-600">or</span>
-          <Button size="sm" onClick={()=>navigate("/signup")}>Sign up</Button>
+          <Button size="sm" onClick={() => navigate("/signup")}>
+            Sign up
+          </Button>
         </div>
       </div>
     </nav>

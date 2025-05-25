@@ -14,7 +14,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/lib/validation/loginSchema";
 import { useNavigate } from "react-router-dom";
 
+import { useDispatch, useSelector } from "react-redux";
+
+import { login } from "../../redux/freatures/auth/authSlice";
+
 export function Login() {
+  const dispatch = useDispatch();
+  const { loading, error, user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   const {
@@ -26,9 +32,14 @@ export function Login() {
   });
 
   //submit
-  const onSubmit = (data) => {
-    console.log("Login Data:", data);
-    // navigate or login logic
+  const onSubmit = async (data) => {
+    const res = await dispatch(login(data));
+    if (res?.payload?.token) {
+      localStorage.setItem("token", res?.payload?.token);
+      navigate("/");
+    } else {
+      console.error("Login failed:", res?.error?.message || "Unknown error");
+    }
   };
   return (
     <div className="flex-grow flex items-center justify-center bg-gray-100">
