@@ -1,5 +1,5 @@
 
-import Navbar from "./common/Navbar";
+import Navbar from "./Navbar";
 
 function Header() {
   return (
