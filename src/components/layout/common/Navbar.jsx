@@ -1,15 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import HoverButton from "../../common/HoverButton";
+
 
 function Navbar() {
   const navigate = useNavigate();
-  const [showDropdown, setShowDropdown] = useState(false);
-  const categories = ["Computer Science", "Data Science", "Business"];
+  const [showDropdown, setShowDropdown] = useState(null);
 
-  const handleShowDropdown = () => {
-    setShowDropdown(!showDropdown);
-  };
+  const categories = ["Computer Science", "Data Science", "Business"];
 
   return (
     <nav className="bg-gradient-to-r from-blue-600/5 to-purple-600/5 border-b border-gray-200 backdrop-blur-sm sticky top-0 z-50">
@@ -28,14 +27,13 @@ function Navbar() {
 
           {/* Navigation */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button
-              variant="ghost"
-              onClick={handleShowDropdown}
-              className="text-gray-700 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:text-white relative"
+            <HoverButton
+              onHovered={(value) => setShowDropdown(value)}
+              name="courses"
             >
               Courses
               {showDropdown && (
-                <ul className="absolute left-0 top-full mt-2 w-56 bg-white border rounded-lg shadow-lg z-10 py-1">
+                <ul className="absolute left-0 top-full mt-1 w-56 bg-white border rounded-lg shadow-lg z-10 py-1">
                   {categories.map((category, index) => (
                     <li
                       key={index}
@@ -46,21 +44,17 @@ function Navbar() {
                   ))}
                 </ul>
               )}
-            </Button>
-            <Button
-              variant="ghost"
-              className="text-gray-700 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:text-white"
+            </HoverButton>
+            <HoverButton
+              name="about"
               onClick={() => navigate("/about")}
             >
               About
-            </Button>
-            <Button
-              variant="ghost"
-              className="text-gray-700 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:text-white"
-              onClick={() => navigate("/blog")}
-            >
+            </HoverButton>
+            <HoverButton onClick={() => navigate("/blog")}>
               Blog
-            </Button>
+            </HoverButton>
+
           </div>
         </div>
 
